@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><title>AyushBot</title></head>
+<body>
+  <h1>AyushBot 🤖</h1>
+  <input id="prompt" placeholder="Type your Hinglish prompt" />
+  <button onclick="sendPrompt()">Send</button>
+  <pre id="response"></pre>
+
+  <script>
+    async function sendPrompt() {
+      const prompt = document.getElementById("prompt").value;
+      const res = await fetch("http://152.56.178.99:11434/api/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+      });
+      const data = await res.json();
+      document.getElementById("response").textContent = data.response;
+    }
+  </script>
+</body>
+</html>
